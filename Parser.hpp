@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -8,28 +9,43 @@ class Parser {
 
     public:
 
-        Parser(istream& inFile): inFile(inFile) {};
+        Parser();
 
-        bool anotherInstruction();
+        Parser(istream& inFile) {
+            string line;
+            while (inFile >> line) {
+                lineQueue.push(line);
+            }
 
-        void adv() const;
+        };
 
+        bool anotherInstruction() const;
+
+        void adv();
+
+        // if 0 is returned it is an A-ins, else if 1 then C, else if 2 it is label
         int instructionType();
 
         string symbol();
 
-        // returns mnemonoc in current C-ins. Called if commandType is C_
-        string dest();
+        // returns mnemonic in current C-ins. Called if commandType is C_
+        string destCode();
 
-        string comp();
+        string compCode();
 
-        string jump();
+        string jumpCode();
+
+        string removeComment(string);
 
 
 
     private:
 
-        istream& inFile;
+        queue<string> lineQueue;
+        const vector<string> dest = {"null", "M", "D", "MD", "A", "AM", "AD", "AMD"};
+        const vector<string> jump = {"null", "JGT", "JEQ", "JGE", "JLT", "JNE", "JLE", "JMP"};
+        const vector<string> a0 = {"0", "1", "-1", "D", "A", "!D", "!A", "-D", "D+1", "A+1", "D-1"
+                                    "A-1", "D-1", "D+A", "D-A", "A-D", "D&A", "D|A"};
 
 
 
