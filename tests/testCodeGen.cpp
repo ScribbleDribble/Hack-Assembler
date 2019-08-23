@@ -1,0 +1,28 @@
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+#include "../CodeGen.hpp"
+
+
+TEST_CASE("dest code", "bits") {
+
+    CodeGen cg;
+
+    REQUIRE(cg.destBits("null") == "000");
+    REQUIRE(cg.destBits("M") == "001");
+    REQUIRE(cg.destBits("D") == "010");
+    REQUIRE(cg.destBits("MD") == "011");
+
+}
+
+TEST_CASE("comp", "bits") {
+
+    CodeGen cg;
+
+    REQUIRE(cg.compBits("D|A") == "010101");
+    REQUIRE(cg.compBits("A-D") == "000111");
+    REQUIRE(cg.compBits("M") == "110000");
+    REQUIRE(cg.compBits("M-D") == "000111");
+
+}
+
+
