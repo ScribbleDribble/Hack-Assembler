@@ -8,7 +8,7 @@ using namespace std;
 
 class Parser {
 
-
+    public:
         Parser();
 
         Parser(istream& inFile) {
@@ -28,14 +28,9 @@ class Parser {
 
         string symbol(string);
 
+        vector<char>setNull();
 
         vector<string> codes(string);
-        // returns mnemonic in current C-ins. Called if commandType is C_
-        string destCode();
-
-        string compCode();
-
-        string jumpCode();
 
         // removes comments and whitespaces
         string removeRedundancy(string);

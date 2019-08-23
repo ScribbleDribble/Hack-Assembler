@@ -18,9 +18,7 @@ string Parser::removeRedundancy(string line) {
 
     vector<char> charVector;
 
-    bool del = false;
-
-    int i;
+    unsigned int i;
 
 
     for (i = 0; i < line.size(); i++)
@@ -97,25 +95,56 @@ string Parser::symbol(string current_ins) {
 
 }
 
+vector<char> Parser::setNull() {
+
+    vector<char> v;
+    v.push_back('n');
+    v.push_back('u');
+    v.push_back('l');
+    v.push_back('l');
+    return v;
+
+}
+
 vector<string> Parser::codes(string current_ins) {
 
     vector<string> fields;
 
 
+    // individual fields
+    vector<char> dest;
+    vector<char> comp;
+    vector<char> jump;
 
-    vector<char>dest;
-    vector<char>comp;
-    vector<char>jump;
+    jump = setNull();
 
+    // helps log what field we should currently be retrieving from. index 0, if true, indicates we have finished retrieving from
+    // dest field and we are now at comp part. etc.
     bool checkPoint[] = {false, false};
 
     int j = 0, k = 0;
 
-    for (int i = 0; i < current_ins.size(); i++)
+    for (unsigned int i = 0; i < current_ins.size(); i++)
     {
-        if (current_ins[i] != '=' && checkPoint[0] == false)
+
+        if (current_ins[i] == ';' && checkPoint[0] == false)
         {
-            dest[i] = current_ins[i];
+            comp = dest;
+            dest.clear();
+            dest = setNull();
+
+            checkPoint[0] = true;
+            checkPoint[1] = true;
+
+            // remove null status jump by default has
+            jump.clear();
+
+
+        }
+
+        else if (current_ins[i] != '=' && checkPoint[0] == false)
+        {
+            dest.push_back(current_ins[i]);
         }
 
         else if (current_ins[i] == '=' && checkPoint[0] == false)
@@ -123,19 +152,20 @@ vector<string> Parser::codes(string current_ins) {
             checkPoint[0] = true;
         }
 
-        else if (current_ins[i] != ';' && checkPoint[0] == true)
+        else if (current_ins[i] != ';' && checkPoint[0] == true && checkPoint[1] == false)
         {
-            comp[j++] = current_ins[i];
+            comp.push_back(current_ins[i]);
         }
 
         else if (current_ins[i] == ';' && checkPoint[0] == true)
         {
             checkPoint[1] = true;
+            jump.clear();
         }
 
         else if (checkPoint[1] == true)
         {
-            jump[k++] = current_ins[i];
+            jump.push_back(current_ins[i]);
         }
 
     }
@@ -144,36 +174,15 @@ vector<string> Parser::codes(string current_ins) {
     string compMnemonic(comp.begin(), comp.end());
     string jumpMnemonic(jump.begin(), jump.end());
 
-    fields[0] = destMnemonic;
-    fields[1] = compMnemonic;
-    fields[2] = jumpMnemonic;
+    fields.push_back(destMnemonic);
+    fields.push_back(compMnemonic);
+    fields.push_back(jumpMnemonic);
 
     return fields;
 
 }
 
-/*
-string Parser::destCode(string current_ins) {
 
-    vector<char>charVector;
-
-    for (int i = 0; i < current_ins.size(); i++)
-    {
-        if (current_ins[i] != '=')
-        {
-            charVector[i] = charVector[i];
-        }
-
-        else
-        {
-            break;
-        }
-    }
-
-    string destMneumonic(charVector.begin(), charVector.end());
-    return destMneumonic;
-}
-*/
 
 
 

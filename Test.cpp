@@ -2,6 +2,7 @@
 #include "catch.hpp"
 #include "Parser.hpp"
 #include <iostream>
+#include <stdlib.h>
 
 
 TEST_CASE("each line in file", "result after method") {
@@ -63,3 +64,35 @@ TEST_CASE("Label", "symbol") {
 
 
 }
+
+
+TEST_CASE("Mnemonic type", "Mnemonic") {
+
+
+    Parser parseTest;
+    vector<string> v = parseTest.codes("D=M");
+    REQUIRE(v[0] == "D");
+    REQUIRE(v[1] == "M");
+    REQUIRE(v[2] == "null");
+
+    v = parseTest.codes("D;JGT");
+    REQUIRE(v[0] == "null");
+    REQUIRE(v[1] == "D");
+    REQUIRE(v[2] == "JGT");
+
+    v = parseTest.codes("AMD=M+1");
+    REQUIRE(v[0] == "AMD");
+    REQUIRE(v[1] == "M+1");
+    REQUIRE(v[2] == "null");
+
+    v = parseTest.codes("D=D-M;JLE");
+    REQUIRE(v[0] == "D");
+    REQUIRE(v[1] == "D-M");
+    REQUIRE(v[2] == "JLE");
+
+
+
+
+
+}
+
