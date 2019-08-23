@@ -1,6 +1,0 @@
-hi
-i 
-am
-a 
-single 
-program
