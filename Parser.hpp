@@ -4,10 +4,10 @@
 
 using namespace std;
 
+
+
 class Parser {
 
-
-    public:
 
         Parser();
 
@@ -28,6 +28,8 @@ class Parser {
 
         string symbol(string);
 
+
+        vector<string> codes(string);
         // returns mnemonic in current C-ins. Called if commandType is C_
         string destCode();
 

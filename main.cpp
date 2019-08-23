@@ -8,7 +8,6 @@ int main(int argc, char *argv[]) {
 
     if (argc != 2)
     {
-
         cerr << "Usage: ./ <filename>" << endl;
         return 1;
     }

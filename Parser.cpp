@@ -1,6 +1,7 @@
 #include "Parser.hpp"
 
 #include <vector>
+#include <memory>
 
 Parser::Parser() {
 };
@@ -32,7 +33,6 @@ string Parser::removeRedundancy(string line) {
                 break;
             }
         }
-
 
         if (line[i] != ' ')
         {
@@ -96,3 +96,84 @@ string Parser::symbol(string current_ins) {
     return current_ins;
 
 }
+
+vector<string> Parser::codes(string current_ins) {
+
+    vector<string> fields;
+
+
+
+    vector<char>dest;
+    vector<char>comp;
+    vector<char>jump;
+
+    bool checkPoint[] = {false, false};
+
+    int j = 0, k = 0;
+
+    for (int i = 0; i < current_ins.size(); i++)
+    {
+        if (current_ins[i] != '=' && checkPoint[0] == false)
+        {
+            dest[i] = current_ins[i];
+        }
+
+        else if (current_ins[i] == '=' && checkPoint[0] == false)
+        {
+            checkPoint[0] = true;
+        }
+
+        else if (current_ins[i] != ';' && checkPoint[0] == true)
+        {
+            comp[j++] = current_ins[i];
+        }
+
+        else if (current_ins[i] == ';' && checkPoint[0] == true)
+        {
+            checkPoint[1] = true;
+        }
+
+        else if (checkPoint[1] == true)
+        {
+            jump[k++] = current_ins[i];
+        }
+
+    }
+
+    string destMnemonic(dest.begin(), dest.end());
+    string compMnemonic(comp.begin(), comp.end());
+    string jumpMnemonic(jump.begin(), jump.end());
+
+    fields[0] = destMnemonic;
+    fields[1] = compMnemonic;
+    fields[2] = jumpMnemonic;
+
+    return fields;
+
+}
+
+/*
+string Parser::destCode(string current_ins) {
+
+    vector<char>charVector;
+
+    for (int i = 0; i < current_ins.size(); i++)
+    {
+        if (current_ins[i] != '=')
+        {
+            charVector[i] = charVector[i];
+        }
+
+        else
+        {
+            break;
+        }
+    }
+
+    string destMneumonic(charVector.begin(), charVector.end());
+    return destMneumonic;
+}
+*/
+
+
+
