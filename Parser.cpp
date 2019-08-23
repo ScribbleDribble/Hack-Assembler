@@ -13,51 +13,86 @@ void Parser::adv() {
     lineQueue.pop();
 }
 
-string Parser::removeComment(string line) {
+string Parser::removeRedundancy(string line) {
+
+    vector<char> charVector;
 
     bool del = false;
 
-    for (i = 0; i < line.size() - 1; i++)
+    int i;
+
+
+    for (i = 0; i < line.size(); i++)
     {
-        if (line[i] == '/' && line[i+1] == '/')
+
+        if (i < line.size() - 1)
         {
-            cout << i << line.size() << endl;
-            del = true;
-            break;
+            if (line[i] == '/' && line[i+1] == '/')
+            {
+                break;
+            }
         }
+
+
+        if (line[i] != ' ')
+        {
+            charVector.push_back(line[i]);
+        }
+
+
     }
 
-    if (del == true)
-    {
-        line = line.erase(i, line.size() - 1);
 
-        if (i == 0)
-        {
-            return "null";
-        }
-    }
+    string correctedString( charVector.begin(), charVector.end() );
 
-    return line;
+    return correctedString;
 
 }
 
 int Parser::instructionType() {
 
-    string current_ins;
+    string current_ins = lineQueue.front();
+    current_ins = removeRedundancy(current_ins);
 
+    if (current_ins[0] == '@')
+    {
+        symbol(current_ins);
+        return 0;
+    }
 
+    else if (current_ins[0] == '(' && current_ins[current_ins.size() - 1] == ')')
+    {
+        return 2;
+    }
 
-    current_ins = lineQueue.front();
+    else if (current_ins == "")
+    {
+        return -1;
+    }
 
-//    if (current_ins[0] == '(')
-        // L-ins
-
-    //else if (current_ins[0] == '@')
-    //{
-        // A ins
-    //}
-
+    else
+    {
+        return 1;
+    }
 
     return 1;
+
+}
+
+string Parser::symbol(string current_ins) {
+
+
+    if (current_ins[0] == '@')
+    {
+        current_ins = current_ins.erase(0, 1);
+    }
+
+    else
+    {
+        current_ins = current_ins.erase(0, 1);
+        current_ins = current_ins.erase(current_ins.size() - 1);
+    }
+
+    return current_ins;
 
 }

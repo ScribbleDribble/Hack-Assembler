@@ -26,7 +26,7 @@ class Parser {
         // if 0 is returned it is an A-ins, else if 1 then C, else if 2 it is label
         int instructionType();
 
-        string symbol();
+        string symbol(string);
 
         // returns mnemonic in current C-ins. Called if commandType is C_
         string destCode();
@@ -35,8 +35,19 @@ class Parser {
 
         string jumpCode();
 
-        string removeComment(string);
+        // removes comments and whitespaces
+        string removeRedundancy(string);
 
+        //TESTING
+        void push(string ins) {
+
+            lineQueue.push(ins);
+        }
+
+        void pop() {
+
+            lineQueue.pop();
+        }
 
 
     private:

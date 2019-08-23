@@ -35,6 +35,7 @@
 		<Unit filename="CodeGen.cpp" />
 		<Unit filename="Parser.cpp" />
 		<Unit filename="Parser.hpp" />
+		<Unit filename="Test.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
