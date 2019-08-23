@@ -46,16 +46,11 @@ class Parser {
             lineQueue.pop();
         }
 
+        private:
+            queue<string>lineQueue;
 
-    private:
-
-        queue<string> lineQueue;
         const vector<string> dest = {"null", "M", "D", "MD", "A", "AM", "AD", "AMD"};
         const vector<string> jump = {"null", "JGT", "JEQ", "JGE", "JLT", "JNE", "JLE", "JMP"};
         const vector<string> a0 = {"0", "1", "-1", "D", "A", "!D", "!A", "-D", "D+1", "A+1", "D-1"
                                     "A-1", "D-1", "D+A", "D-A", "A-D", "D&A", "D|A"};
-
-
-
-
 };

@@ -25,5 +25,4 @@ int main(int argc, char *argv[]) {
     Parser parse(infile);
     parse.adv();
 
-    return 0;
 }

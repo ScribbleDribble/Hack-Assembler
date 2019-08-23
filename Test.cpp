@@ -92,7 +92,5 @@ TEST_CASE("Mnemonic type", "Mnemonic") {
 
 
 
-
-
 }
 
