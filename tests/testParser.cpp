@@ -71,9 +71,9 @@ TEST_CASE("Mnemonic type", "Mnemonic") {
 
 
     Parser parseTest;
-    vector<string> v = parseTest.codes("D=M");
+    vector<string> v = parseTest.codes("D=A");
     REQUIRE(v[0] == "D");
-    REQUIRE(v[1] == "M");
+    REQUIRE(v[1] == "A");
     REQUIRE(v[2] == "null");
 
     v = parseTest.codes("D;JGT");

@@ -23,6 +23,9 @@ class Parser {
 
         void adv();
 
+        // removes comments and whitespaces
+        string removeRedundancy(string);
+
         // if 0 is returned it is an A-ins, else if 1 then C, else if 2 it is label
         int instructionType();
 
@@ -32,25 +35,36 @@ class Parser {
 
         vector<string> codes(string);
 
-        // removes comments and whitespaces
-        string removeRedundancy(string);
+        string getCurrentInstruction() const;
 
-        //TESTING
+        string getA() const {
+            return a;
+        }
+
+        // FOR TESTING
         void push(string ins) {
 
             lineQueue.push(ins);
         }
-
+        // FOR TESTING
         void pop() {
 
             lineQueue.pop();
         }
 
-        private:
-            queue<string>lineQueue;
+
+    private:
+        queue<string>lineQueue;
+
+        string a;
+
+        void setA(string);
 
 
-        const vector<string> jump = {"null", "JGT", "JEQ", "JGE", "JLT", "JNE", "JLE", "JMP"};
-        const vector<string> a0 = {"0", "1", "-1", "D", "A", "!D", "!A", "-D", "D+1", "A+1", "D-1"
-                                    "A-1", "D-1", "D+A", "D-A", "A-D", "D&A", "D|A"};
+
+
+
+
+        string current_instruction;
+
 };

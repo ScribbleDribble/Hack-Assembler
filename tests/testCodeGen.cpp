@@ -25,4 +25,15 @@ TEST_CASE("comp", "bits") {
 
 }
 
+TEST_CASE("symbol", "bits") {
+
+    CodeGen cg;
+
+    REQUIRE(cg.aInstructionBits("15") == "0111100000000000");
+    REQUIRE(cg.aInstructionBits("1") == "0100000000000000");
+    REQUIRE(cg.aInstructionBits("63") == "0111111000000000");
+    REQUIRE(cg.aInstructionBits("20") == "0001010000000000");
+    REQUIRE(cg.aInstructionBits("101") == "0110010100000000");
+
+}
 

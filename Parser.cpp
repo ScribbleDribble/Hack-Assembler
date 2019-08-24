@@ -43,6 +43,8 @@ string Parser::removeRedundancy(string line) {
 
     string correctedString( charVector.begin(), charVector.end() );
 
+    current_instruction = correctedString;
+
     return correctedString;
 
 }
@@ -50,6 +52,7 @@ string Parser::removeRedundancy(string line) {
 int Parser::instructionType() {
 
     string current_ins = lineQueue.front();
+
     current_ins = removeRedundancy(current_ins);
 
     if (current_ins[0] == '@')
@@ -60,6 +63,7 @@ int Parser::instructionType() {
 
     else if (current_ins[0] == '(' && current_ins[current_ins.size() - 1] == ')')
     {
+
         return 2;
     }
 
@@ -174,12 +178,39 @@ vector<string> Parser::codes(string current_ins) {
     string compMnemonic(comp.begin(), comp.end());
     string jumpMnemonic(jump.begin(), jump.end());
 
+    setA(compMnemonic);
+
     fields.push_back(destMnemonic);
     fields.push_back(compMnemonic);
     fields.push_back(jumpMnemonic);
 
     return fields;
 
+}
+
+void Parser::setA(string compMnemonic) {
+
+    a = "-1";
+
+    for (int i = 0; i < compMnemonic.size(); i++)
+    {
+        if (compMnemonic[i] == 'M')
+        {
+            a = "1";
+        }
+    }
+
+    // if comp doenst involve M, set a = 0
+    if (a != "1")
+    {
+        a = "0";
+    }
+
+}
+
+
+string Parser::getCurrentInstruction() const{
+    return Parser::current_instruction;
 }
 
 
