@@ -37,7 +37,8 @@ int main(int argc, char *argv[]) {
         string word16;
 
         vector<string>mnemonics = parser.codes(parser.getCurrentInstruction());
-        cout << mnemonics[0] << mnemonics[1] << mnemonics[2] <<endl;
+
+        cout << parser.getCurrentInstruction() << endl;
 
         switch (mode)
         {
@@ -46,13 +47,14 @@ int main(int argc, char *argv[]) {
                 break;
 
             case (1):
-                word16 = "111" + parser.getA() + codeGen.destBits(mnemonics[0]) + codeGen.compBits(mnemonics[1]) + codeGen.jumpBits(mnemonics[2]);
+                word16 = "111" + parser.getA() + codeGen.compBits(mnemonics[0]) + codeGen.destBits(mnemonics[1]) + codeGen.jumpBits(mnemonics[2]);
                 break;
 
             case(2):
-                cout << "ok!" << endl;
                 break;
         }
+
+		cout << word16 << endl;
 
         outFile << word16 +"\n";
 

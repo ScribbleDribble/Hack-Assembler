@@ -180,8 +180,8 @@ vector<string> Parser::codes(string current_ins) {
 
     setA(compMnemonic);
 
-    fields.push_back(destMnemonic);
     fields.push_back(compMnemonic);
+    fields.push_back(destMnemonic);
     fields.push_back(jumpMnemonic);
 
     return fields;

@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include <cmath>
 #include <stack>
+#include <stdlib.h>
+#include <bits/stdc++.h>
 
 string CodeGen::destBits(const string dest) {
 
@@ -50,7 +52,7 @@ string CodeGen::compBits(string comp) {
 
                                    {"M-1", "110010"}, {"D+M", "000010"}, {"M-D", "000111"}, {"D&M", "000000"},
 
-                                   {"D|M", "010101"}
+                                   {"D|M", "010101"}, {"D-M", "010011"}
 
                                    };
 
@@ -110,7 +112,6 @@ string CodeGen::aInstructionBits(string a_value) {
     char val;
     int temp;
     // MSB is always 0 to represent an A instruction
-    word.push_back('0');
 
     while (num > 0)
     {
@@ -123,12 +124,18 @@ string CodeGen::aInstructionBits(string a_value) {
         num = num/2.0;
     }
 
-    while(word.size() != 16)
-    {
-        word.push_back('0');
-    }
+
 
     string word_string(word.begin(), word.end());
+
+
+    while(word_string.size() != 16)
+    {
+        word_string.append("0");
+    }
+
+    reverse(word_string.begin(), word_string.end());
+
 
     return word_string;
 

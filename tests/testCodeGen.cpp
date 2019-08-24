@@ -29,11 +29,11 @@ TEST_CASE("symbol", "bits") {
 
     CodeGen cg;
 
-    REQUIRE(cg.aInstructionBits("15") == "0111100000000000");
-    REQUIRE(cg.aInstructionBits("1") == "0100000000000000");
-    REQUIRE(cg.aInstructionBits("63") == "0111111000000000");
-    REQUIRE(cg.aInstructionBits("20") == "0001010000000000");
-    REQUIRE(cg.aInstructionBits("101") == "0110010100000000");
+    REQUIRE(cg.aInstructionBits("5") == "0000000000000101");
+    REQUIRE(cg.aInstructionBits("20") == "0000000000010100");
+    REQUIRE(cg.aInstructionBits("63") == "0000000000111111");
+    REQUIRE(cg.aInstructionBits("0") == "0000000000000000");
+    REQUIRE(cg.aInstructionBits("101") ==  "0000000001100101");
 
 }
 
