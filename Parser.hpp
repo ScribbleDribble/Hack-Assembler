@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -13,10 +15,11 @@ class Parser {
 
         Parser(istream& inFile) {
             string line;
-            while (inFile >> line) {
+            while (getline(inFile, line))
+            {
+                int a, b;
                 lineQueue.push(line);
             }
-
         };
 
         bool anotherInstruction() const;

@@ -3,6 +3,9 @@
 
 using namespace std;
 
+
+SymbolTable::SymbolTable() {};
+
 bool SymbolTable::contains(string symbol) {
 
     map<string, int>::iterator iter;

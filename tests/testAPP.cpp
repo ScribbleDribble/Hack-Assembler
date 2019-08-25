@@ -5,6 +5,8 @@
 #include <vector>
 #include <stdlib.h>
 
+
+// compare my binary output file with a file containing expected output
 TEST_CASE("my binary word", "possibly correct word??") {
 
     ifstream inFile;
@@ -20,16 +22,12 @@ TEST_CASE("my binary word", "possibly correct word??") {
         words.push_back(line);
     }
 
-
-
     ifstream testFile;
     testFile.open("testValues.hack");
 
     vector<string> test_words;
     string line2;
     int i = 0;
-
-    cout <<  "here is fine" << endl;
 
     while (testFile >> line2)
     {

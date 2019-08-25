@@ -25,7 +25,6 @@ string CodeGen::destBits(const string dest) {
         }
     }
 
-    cout << "here" << endl;
     throw invalid_argument("Invalid instruction");
 }
 
@@ -100,7 +99,6 @@ string CodeGen::jumpBits(const string jump) {
         }
     }
 
-    cout << "here 3" << endl;
     throw invalid_argument("Invalid instruction");
 }
 

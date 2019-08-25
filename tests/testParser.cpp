@@ -18,6 +18,9 @@ TEST_CASE("each line in file", "result after method") {
     REQUIRE(parseTest.removeRedundancy("M=//D") == "M=");
     REQUIRE(parseTest.removeRedundancy("// @2 means load constant 2 into the A-register") == "");
     REQUIRE(parseTest.removeRedundancy("D = M + 1") == "D=M+1");
+	REQUIRE(parseTest.removeRedundancy("(INFINITE_LOOP) // this is a comment") == "(INFINITE_LOOP)");
+	REQUIRE(parseTest.removeRedundancy(" @1 //nope") == "@1");
+	REQUIRE(parseTest.removeRedundancy("") == "");
 }
 
 
@@ -50,7 +53,6 @@ TEST_CASE("instruction", "instruction type") {
     REQUIRE(parseTest.instructionType() == 1);
     parseTest.pop();
 
-
 }
 
 TEST_CASE("Label", "symbol") {
@@ -72,23 +74,23 @@ TEST_CASE("Mnemonic type", "Mnemonic") {
 
     Parser parseTest;
     vector<string> v = parseTest.codes("D=A");
-    REQUIRE(v[0] == "D");
-    REQUIRE(v[1] == "A");
+    REQUIRE(v[1] == "D");
+    REQUIRE(v[0] == "A");
     REQUIRE(v[2] == "null");
 
     v = parseTest.codes("D;JGT");
-    REQUIRE(v[0] == "null");
-    REQUIRE(v[1] == "D");
+    REQUIRE(v[1] == "null");
+    REQUIRE(v[0] == "D");
     REQUIRE(v[2] == "JGT");
 
     v = parseTest.codes("AMD=M+1");
-    REQUIRE(v[0] == "AMD");
-    REQUIRE(v[1] == "M+1");
+    REQUIRE(v[1] == "AMD");
+    REQUIRE(v[0] == "M+1");
     REQUIRE(v[2] == "null");
 
     v = parseTest.codes("D=D-M;JLE");
-    REQUIRE(v[0] == "D");
-    REQUIRE(v[1] == "D-M");
+    REQUIRE(v[1] == "D");
+    REQUIRE(v[0] == "D-M");
     REQUIRE(v[2] == "JLE");
 
 
