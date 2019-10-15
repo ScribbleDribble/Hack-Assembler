@@ -9,6 +9,7 @@ class SymbolTable {
     public:
 
         SymbolTable();
+		~SymbolTable();
 
         void addEntry(string symbol, int address) {
             symbolTable.insert(pair<string, int>(symbol, address));

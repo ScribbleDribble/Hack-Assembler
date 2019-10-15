@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/hack.dir/Parser.cpp.o CMakeFiles/hack.dir/CodeGen.cpp.o CMakeFiles/hack.dir/main.cpp.o CMakeFiles/hack.dir/SymbolTable.cpp.o  -o hack 

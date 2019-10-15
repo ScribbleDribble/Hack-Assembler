@@ -4,6 +4,7 @@
 #include "SymbolTable.hpp"
 #include <fstream>
 #include <string>
+#include <memory>
 
 using namespace std;
 
@@ -36,7 +37,6 @@ static void second_pass(SymbolTable& table, Parser parser, CodeGen codeGen) {
 
         ofstream outFile;
         outFile.open("Prog.hack");
-
 
         int var_mem_loc = 16;
 
@@ -127,14 +127,11 @@ int main(int argc, char *argv[]) {
     CodeGen codeGen;
     SymbolTable table;
 
-    SymbolTable* tablePtr = new SymbolTable();
+    // pointer will need to be copied to other functions
+    shared_ptr<SymbolTable> tablePtr = make_shared<SymbolTable>();
 
-    tablePtr = &table;
-
-    first_pass(table, parser);
-    second_pass(table, parser, codeGen);
-
-    //delete tablePtr;
+    first_pass(*tablePtr, parser);
+    second_pass(*tablePtr, parser, codeGen);
 
     cout << "Translation complete!" << endl;
 

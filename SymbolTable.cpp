@@ -5,6 +5,7 @@ using namespace std;
 
 
 SymbolTable::SymbolTable() {};
+SymbolTable::~SymbolTable(){};
 
 bool SymbolTable::contains(string symbol) {
 
